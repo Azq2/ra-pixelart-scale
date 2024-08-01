@@ -1,16 +1,10 @@
 use clap::Parser;
-use librashader_runtime_gl::options::FilterChainOptionsGL;
 use librashader_runtime_gl::{FilterChainGL, GLFramebuffer, GLImage};
 use librashader_common::{Size, Viewport};
-use librashader::presets::{Scale2D, ScaleFactor, ScaleType, Scaling};
-use librashader::presets::ShaderPreset;
-use librashader::presets::context::VideoDriver;
 use gl_headless::gl_headless;
 use image::GenericImageView;
 use image::ImageBuffer;
-use gl::types::{GLchar, GLenum, GLint, GLsizei, GLuint, GLvoid};
-use std::ops::Mul;
-use num_traits::AsPrimitive;
+use gl::types::{GLuint};
 use std::path::Path;
 use std::process::ExitCode;
 
@@ -22,13 +16,13 @@ struct Args {
 	#[arg(short, long, default_value = "scalefx-9x")]
 	method: String,
 
-	/// Custom shader
-	#[arg(short, long, default_value = "")]
-	shader: String,
-
 	/// Input one frame
 	#[arg(short, long)]
 	input: String,
+
+	/// Output scale
+	#[arg(short, long, default_value_t = 0.0)]
+	scale: f64,
 
 	/// Output filename
 	#[arg(short, long)]
@@ -39,25 +33,37 @@ struct Args {
 unsafe fn main() -> ExitCode {
 	let args = Args::parse();
 	let shaders_dir = get_shaders_dir();
+	let shaders_index = load_shaders_index(shaders_dir.as_str());
 
 	// Load input image
 	let img = image::open(args.input.as_str()).expect("Failed to load image");
 	let (width, height) = img.dimensions();
 	let data = img.into_rgba8().into_raw();
 
-	let shader_path = Path::new(&shaders_dir).join(format!("{}.slangp", args.method));
-	if !shader_path.exists() {
+	let shader_filename = shaders_index[args.method.clone()][1].as_str();
+	if shader_filename.is_none() {
 		eprintln!("Scaling method {} not found.", args.method);
 		return ExitCode::from(1);
 	}
 
-	let output_size = calc_output_size(shader_path.to_str().unwrap(), Size::new(width, height));
+	let default_scale = shaders_index[args.method.clone()][0].as_f64().unwrap();
+	let shader_path = Path::new(shaders_dir.as_str()).join(shader_filename.unwrap().to_string());
+
+	let mut output_scale = args.scale;
+	if args.scale <= 0.0 {
+		output_scale = default_scale;
+	}
+
+	let output_size = Size::new(
+		((width as f64) * output_scale).round() as u32,
+		((height as f64) * output_scale).round() as u32
+	);
 
 	eprintln!("Shader: {}", shader_path.to_str().unwrap());
 	eprintln!("Input: {}", args.input);
 	eprintln!("Input size: {}x{}", width, height);
 	eprintln!("Output: {}", args.output);
-	eprintln!("Output size: {}x{}", output_size.width, output_size.height);
+	eprintln!("Output size: {}x{} ({}x)", output_size.width, output_size.height, output_scale);
 
 	gl::Viewport(0, 0, width as _, height as _);
 
@@ -67,7 +73,6 @@ unsafe fn main() -> ExitCode {
 	gl::BindTexture(gl::TEXTURE_2D, rendered_texture);
 	gl::TexSubImage2D(gl::TEXTURE_2D, 0, 0, 0, width as _, height as _, gl::RGBA, gl::UNSIGNED_BYTE, data.as_ptr() as _);
 
-	// Render shader
 	let rendered = GLImage {
 		handle: rendered_texture,
 		format: gl::RGBA8,
@@ -95,6 +100,12 @@ unsafe fn main() -> ExitCode {
 	render_as_png(args.output.as_str(), output_size);
 
 	return ExitCode::from(0);
+}
+
+fn load_shaders_index(shaders_dir: &str) -> serde_json::Value {
+	let index_file = Path::new(shaders_dir).join("index.json");
+	let file = std::fs::File::open(index_file).unwrap();
+	return serde_json::from_reader(file).unwrap();
 }
 
 fn get_shaders_dir() -> String {
@@ -148,81 +159,4 @@ unsafe fn create_texture(width: u32, height: u32) -> (GLuint, GLuint) {
 	}
 
 	return (framebuffer, texture);
-}
-
-unsafe fn calc_output_size(shader_path: &str, original_size: Size<u32>) -> Size<u32> {
-	let preset = ShaderPreset::try_parse_with_driver_context(shader_path, VideoDriver::GlCore).unwrap();
-
-	let mut iterator = preset.shaders.iter().enumerate().peekable();
-	let mut target_size = original_size;
-
-	while let Some((_index, shader_config)) = iterator.next() {
-		let next_size = scale_pass::<u32>(
-			shader_config.scaling.clone(),
-			target_size,
-			original_size,
-			original_size,
-		);
-		target_size = next_size;
-	}
-
-	return target_size;
-}
-
-// From librashader-runtime/src/scaling.rs
-fn scale_pass<T>(scaling: Scale2D, source: Size<T>, viewport: Size<T>, original: Size<T>) -> Size<T>
-where
-	T: Mul<ScaleFactor, Output = f32> + Copy + Ord + 'static,
-	f32: AsPrimitive<T>,
-{
-	const MAX_TEXEL_SIZE: f32 = 16384f32;
-
-	let width = match scaling.x {
-		Scaling {
-			scale_type: ScaleType::Input,
-			factor,
-		} => source.width * factor,
-		Scaling {
-			scale_type: ScaleType::Absolute,
-			factor,
-		} => factor.into(),
-		Scaling {
-			scale_type: ScaleType::Viewport,
-			factor,
-		} => viewport.width * factor,
-		Scaling {
-			scale_type: ScaleType::Original,
-			factor,
-		} => original.width * factor,
-	};
-
-	let height = match scaling.y {
-		Scaling {
-			scale_type: ScaleType::Input,
-			factor,
-		} => source.height * factor,
-		Scaling {
-			scale_type: ScaleType::Absolute,
-			factor,
-		} => factor.into(),
-		Scaling {
-			scale_type: ScaleType::Viewport,
-			factor,
-		} => viewport.height * factor,
-		Scaling {
-			scale_type: ScaleType::Original,
-			factor,
-		} => original.height * factor,
-	};
-
-	Size {
-		width: std::cmp::min(
-			std::cmp::max(width.round().as_(), 1f32.as_()),
-			MAX_TEXEL_SIZE.as_(),
-		),
-		height: std::cmp::min(
-			std::cmp::max(height.round().as_(), 1f32.as_()),
-			MAX_TEXEL_SIZE.as_(),
-		),
-	}
 }

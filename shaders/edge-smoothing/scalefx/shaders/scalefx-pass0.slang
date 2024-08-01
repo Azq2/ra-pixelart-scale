@@ -91,7 +91,7 @@ void main()
 	*/
 
 
-#define TEX(x, y) textureOffset(Source, vTexCoord, ivec2(x, y)).rgba
+#define TEX(x, y) textureOffset(Source, vTexCoord, ivec2(x, y)).rgb
 
 	// read texels
 	vec3 A = TEX(-1,-1);

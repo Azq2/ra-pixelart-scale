@@ -3,6 +3,34 @@
 
 This tool allows to use RetroArch shaders for static images.
 
+# Usage
+```
+Pixel Art scaling algorithms from RetroArch
+
+Usage: ra-pixelart-scale [OPTIONS] --input <INPUT> --output <OUTPUT>
+
+Options:
+  -m, --method <METHOD>                Scale method [default: scalefx-9x]
+  -i, --input <INPUT>                  Input one frame
+  -s, --scale <SCALE>                  Output scale [default: 0]
+  -o, --output <OUTPUT>                Output filename
+      --custom-preset <CUSTOM_PRESET>  Custom .slangp file [default: ]
+  -h, --help                           Print help
+  -V, --version                        Print version
+```
+
+# Examples
+```bash
+# Scale will automatically set to best default for given method
+ra-pixelart-scale -m scalefx-9x -i mario.png -o /tmp/mario-9x.png
+
+# Or set custom scale
+ra-pixelart-scale -m xbrz-freescale-multipass -i mario.png -s 3 -o /tmp/mario-3x.png
+
+# Or use custom slangp preset
+ra-pixelart-scale --custom-preset slangs-shaders/edge-smoothing/scalefx/scalefx.slangp -i mario.png -s 3 -o /tmp/mario-3x.png
+```
+
 # Supported scaling methods
 
 **scalefx**

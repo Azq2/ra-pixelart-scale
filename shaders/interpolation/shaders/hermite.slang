@@ -1,5 +1,9 @@
 #version 450
 
+/*
+     Hermite cubic shader - it's the cubic performed by smoothstep function
+*/
+
 layout(push_constant) uniform Push
 {
 	vec4 SourceSize;
@@ -31,5 +35,21 @@ layout(set = 0, binding = 2) uniform sampler2D Source;
 
 void main()
 {
-   FragColor = texture(Source, vTexCoord).rgba;
+	vec2 p = vTexCoord.xy;
+
+	p = p * params.SourceSize.xy + vec2(0.5, 0.5);
+
+	vec2 i = floor(p);
+	vec2 f = p - i;
+
+	// Smoothstep - amazingly, smoothstep() is slower than calculating directly the expression!
+//	f = smoothstep(0.0, 1.0, f);
+	f = f * f * ( -2.0 * f + 3.0);
+
+	p = i + f;
+
+	p = (p - vec2(0.5, 0.5)) * params.SourceSize.zw;
+
+	// final sum and weight normalization
+   FragColor = vec4(texture(Source, p).rgb, 1.0);
 }

@@ -1,5 +1,11 @@
 #version 450
 
+/*
+	Fragment shader based on "Improved texture interpolation" by Iñigo Quílez
+	Original description: http://www.iquilezles.org/www/articles/texture/texture.htm
+
+*/
+
 layout(push_constant) uniform Push
 {
 	vec4 SourceSize;
@@ -31,5 +37,17 @@ layout(set = 0, binding = 2) uniform sampler2D Source;
 
 void main()
 {
-   FragColor = texture(Source, vTexCoord).rgba;
+	vec2 p = vTexCoord.xy;
+
+	p = p * params.SourceSize.xy + vec2(0.5, 0.5);
+
+	vec2 i = floor(p);
+	vec2 f = p - i;
+	f = f * f * f * (f * (f * 6.0 - vec2(15.0, 15.0)) + vec2(10.0, 10.0));
+	p = i + f;
+
+	p = (p - vec2(0.5, 0.5)) * params.SourceSize.zw;
+
+	// final sum and weight normalization
+   FragColor = vec4(texture(Source, p));
 }

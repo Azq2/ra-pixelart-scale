@@ -1,0 +1,15 @@
+[package]
+name = "xuj"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.13", features = ["derive"] }
+gl = "0.14.0"
+gl-headless = "0.2.2"
+image = "0.25.2"
+librashader = "0.2.8"
+librashader-common = "0.2.8"
+librashader-runtime = "0.2.8"
+librashader-runtime-gl = "0.2.8"
+num-traits = "0.2.19"

@@ -40,8 +40,6 @@ unsafe fn main() -> ExitCode {
 	let args = Args::parse();
 	let shaders_dir = get_shaders_dir();
 
-	println!("shaders_dir={}", shaders_dir);
-
 	// Load input image
 	let img = image::open(args.input.as_str()).expect("Failed to load image");
 	let (width, height) = img.dimensions();
@@ -67,7 +65,7 @@ unsafe fn main() -> ExitCode {
 	let (output_framebuffer, output_texture) = create_texture(output_size.width, output_size.height);
 
 	gl::BindTexture(gl::TEXTURE_2D, rendered_texture);
-	gl::TexSubImage2D(gl::TEXTURE_2D, 0, 0, 0, width as GLsizei, height as GLsizei, gl::RGBA, gl::UNSIGNED_BYTE, data.as_ptr() as _);
+	gl::TexSubImage2D(gl::TEXTURE_2D, 0, 0, 0, width as _, height as _, gl::RGBA, gl::UNSIGNED_BYTE, data.as_ptr() as _);
 
 	// Render shader
 	let rendered = GLImage {

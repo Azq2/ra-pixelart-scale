@@ -31,6 +31,24 @@ ra-pixelart-scale -m xbrz-freescale-multipass -i mario.png -s 3 -o /tmp/mario-3x
 ra-pixelart-scale --custom-preset slangs-shaders/edge-smoothing/scalefx/scalefx.slangp -i mario.png -s 3 -o /tmp/mario-3x.png
 ```
 
+# Alpha channel
+
+Most shaders don't support the alpha channel and produce a white background. But this tool has a special mode for preserving the alpha channel.
+
+This is done by splitting the RGBA image into an RGB + Alpha channel, then each part is scaled separately.
+
+This mode is enabled by default and controlled via `--alpha` argument.
+
+# Scale value
+
+Most shaders are designed for one specific scale value at which they give the best results. And any other values can get worse results.
+
+For e.g. for hq2x, the best scale is 2, for hq4x it is 4.
+
+You don't need to pass `--scale` in most cases, because the best scale is chosen by default for each method.
+
+Pass custom `--scale` only for specific scale methods which can work with any scale value. See table below for more info.
+
 # Supported scaling methods
 
 **scalefx**

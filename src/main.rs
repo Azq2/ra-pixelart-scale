@@ -7,7 +7,7 @@ use gl::types::{GLuint};
 use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
-/// Pixel Art scaling algorithms from RetroArch.
+/// PixelArt scaling algorithms from RetroArch.
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -21,7 +21,7 @@ struct Args {
 
 	/// Input image
 	#[arg(short, long)]
-	input: String,
+	input: Option<String>,
 
 	/// Output scale
 	#[arg(short, long, default_value_t = 0.0)]
@@ -29,7 +29,7 @@ struct Args {
 
 	/// Output filename
 	#[arg(short, long)]
-	output: String,
+	output: Option<String>,
 
 	/// Resize after scale (WxH or Nx)
 	#[arg(long)]
@@ -67,7 +67,17 @@ fn main() -> ExitCode {
 		return ExitCode::from(1);
 	}
 
-	let img = image::open(args.input.as_str()).expect("Failed to load image");
+	if args.input.is_none() {
+		eprintln!("--input is not specified");
+		return ExitCode::from(1);
+	}
+
+	if args.output.is_none() {
+		eprintln!("--output is not specified");
+		return ExitCode::from(1);
+	}
+
+	let img = image::open(args.input.as_ref().unwrap().as_str()).expect("Failed to load image");
 	let (width, height) = img.dimensions();
 
 	let scale_method = get_scaling_method(&args).expect("Invalid --method value");
@@ -135,8 +145,8 @@ fn main() -> ExitCode {
 
 
 	let (scaled_width, scaled_height) = scaled_img.as_ref().unwrap().dimensions();
-	println!("Image saved to: {} [{}x{} -> {}x{}]", args.output, width, height, scaled_width, scaled_height);
-	scaled_img.unwrap().save(args.output).expect("Failed to save image");
+	println!("Image saved to: {} [{}x{} -> {}x{}]", args.output.as_ref().unwrap(), width, height, scaled_width, scaled_height);
+	scaled_img.unwrap().save(args.output.as_ref().unwrap()).expect("Failed to save image");
 	return ExitCode::from(0);
 }
 

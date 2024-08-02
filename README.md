@@ -14,7 +14,7 @@ Options:
   -i, --input <INPUT>                  Input image
   -s, --scale <SCALE>                  Output scale [default: 0]
   -o, --output <OUTPUT>                Output filename
-      --resize <RESIZE>                Output resize
+      --resize <RESIZE>                Output resize (WxH)
       --alpha <ALPHA>                  Alpha saving mode: none, split [default: split]
       --custom-preset <CUSTOM_PRESET>  Custom .slangp file
   -h, --help                           Print help
@@ -50,6 +50,14 @@ For e.g. for hq2x, the best scale is 2, for hq4x it is 4.
 You don't need to pass `--scale` in most cases, because the best scale is chosen by default for each method.
 
 Pass custom `--scale` only for specific scale methods which can work with any scale value. See table below for more info.
+
+# Custom shaders
+
+Although this program is designed for image enlargement, you can also use it to process images using any RetroArch shaders.
+
+```bash
+ra-pixelart-scale --custom-preset shaders/presets/crt-royale-pal-r57shell.slangp -i /tmp/lenna.png -o /tmp/lenna_crt.png
+```
 
 # Supported scaling methods
 

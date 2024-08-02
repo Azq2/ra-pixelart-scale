@@ -14,6 +14,7 @@ Options:
   -i, --input <INPUT>                  Input one frame
   -s, --scale <SCALE>                  Output scale [default: 0]
   -o, --output <OUTPUT>                Output filename
+  -a, --alpha <ALPHA>                  Alpha saving mode: none, split [default: split]
       --custom-preset <CUSTOM_PRESET>  Custom .slangp file [default: ]
   -h, --help                           Print help
   -V, --version                        Print version

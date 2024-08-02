@@ -83,91 +83,102 @@ xvfb-run target/debug/ra-pixelart-scale -i /tmp/lenna.png -o /tmp/test.png
 ```
 
 # Supported scaling methods
-| Name    | Scale |
-|---------|-------|
-| **scalefx:** | |
-|[scalefx-hybrid](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/scalefx-hybrid.slangp)|3x|
-|[scalefx+rAA](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/scalefx+rAA.slangp)|3x|
-|[scalefx](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/scalefx.slangp)|3x|
-|[scalefx-9x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/scalefx-9x.slangp)|9x|
-|[scalefx-old](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/shaders/old/scalefx.slangp)|3x|
-|[scalefx-9x-old](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/shaders/old/scalefx-9x.slangp)|9x|
-| **hqx:** | |
-|[hq3x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/hqx/hq3x.slangp)|3x|
-|[hq2x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/hqx/hq2x.slangp)|2x|
-|[hq2x-halphon](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/hqx/hq2x-halphon.slangp)|2x|
-|[hq4x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/hqx/hq4x.slangp)|4x|
-| **xbrz:** | |
-|[2xbrz-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/2xbrz-linear.slangp)|2x|
-|[4xbrz-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/4xbrz-linear.slangp)|4x|
-|[5xbrz-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/5xbrz-linear.slangp)|5x|
-|[6xbrz-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/6xbrz-linear.slangp)|6x|
-|[xbrz-freescale](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/xbrz-freescale.slangp)|6x|
-|[xbrz-freescale-multipass](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/xbrz-freescale-multipass.slangp)|6x|
-| **xbr:** | |
-|[xbr-lv2](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/xbr-lv2.slangp)|2x|
-|[xbr-lv2-sharp](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/xbr-lv2-sharp.slangp)|2x|
-|[xbr-lv3](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/xbr-lv3.slangp)|2x|
-|[xbr-lv3-sharp](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/xbr-lv3-sharp.slangp)|2x|
-|[super-xbr](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/super-xbr.slangp)|2x|
-|[super-xbr-fast](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/super-xbr-fast.slangp)|2x|
-| **scalenx:** | |
-|[scale2xSFX](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/scale2xSFX.slangp)|2x|
-|[scale2xplus](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/scale2xplus.slangp)|2x|
-|[mmpx](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/mmpx.slangp)|2x|
-|[scale3x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/scale3x.slangp)|3x|
-|[epx](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/epx.slangp)|2x|
-|[scale2x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/scale2x.slangp)|2x|
-| **omniscale:** | |
-|[omniscale](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/omniscale/omniscale.slangp)|2x|
-|[omniscale-legacy](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/omniscale/omniscale-legacy.slangp)|2x|
-| **eagle:** | |
-|[super-2xsai-fix-pixel-shift](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/super-2xsai-fix-pixel-shift.slangp)|2x|
-|[2xsai](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/2xsai.slangp)|2x|
-|[super-2xsai](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/super-2xsai.slangp)|2x|
-|[2xsai-fix-pixel-shift](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/2xsai-fix-pixel-shift.slangp)|2x|
-|[supereagle](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/supereagle.slangp)|2x|
-| **sabr:** | |
-|[sabr-hybrid-deposterize](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/sabr/sabr-hybrid-deposterize.slangp)|2x|
-|[sabr](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/sabr/sabr.slangp)|2x|
-| **xsoft:** | |
-|[4xsoft](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsoft/4xsoft.slangp)|4x|
-|[4xsoftSdB](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsoft/4xsoftSdB.slangp)|4x|
-| **scalehq:** | |
-|[4xScaleHQ](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalehq/4xScaleHQ.slangp)|4x|
-|[2xScaleHQ](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalehq/2xScaleHQ.slangp)|2x|
-| **xsal:** | |
-|[2xsal](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsal/2xsal.slangp)|2x|
-|[4xsal-level2](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsal/4xsal-level2.slangp)|4x|
-|[4xsal-level2-hq](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsal/4xsal-level2-hq.slangp)|4x|
-| **fsr:** | |
-|[smaa+fsr](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/fsr/smaa+fsr.slangp)|2x|
-|[fsr](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/fsr/fsr.slangp)|2x|
-|[fsr-easu](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/fsr/fsr-easu.slangp)|2x|
-| **cleanEdge:** | |
-|[cleanEdge-scale](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/cleanEdge/cleanEdge-scale.slangp)|2x|
-| **ddt:** | |
-|[ddt-jinc-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt-jinc-linear.slangp)|2x|
-|[cut](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/cut.slangp)|2x|
-|[3-point](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/3-point.slangp)|2x|
-|[ddt-jinc](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt-jinc.slangp)|2x|
-|[ddt](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt.slangp)|2x|
-|[ddt-extended](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt-extended.slangp)|2x|
-|[ddt-xbr-lv1](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt-xbr-lv1.slangp)|2x|
-| **nnedi3:** | |
-|[nnedi3-nns32-2x-rgb-nns32-4x-luma](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns32-2x-rgb-nns32-4x-luma.slangp)|4x|
-|[nnedi3-nns64-2x-nns32-4x-nns16-8x-rgb](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns64-2x-nns32-4x-nns16-8x-rgb.slangp)|8x|
-|[nnedi3-nns16-2x-luma](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns16-2x-luma.slangp)|2x|
-|[nnedi3-nns16-4x-luma](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns16-4x-luma.slangp)|4x|
-|[nnedi3-nns32-4x-rgb](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns32-4x-rgb.slangp)|4x|
-|[nnedi3-nns16-2x-rgb](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns16-2x-rgb.slangp)|2x|
-|[nnedi3-nns64-2x-nns32-4x-rgb](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns64-2x-nns32-4x-rgb.slangp)|4x|
-| **nedi:** | |
-|[nedi-hybrid-sharper](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/nedi-hybrid-sharper.slangp)|2x|
-|[nedi-hybrid](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/nedi-hybrid.slangp)|2x|
-|[nedi](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/nedi.slangp)|2x|
-|[nedi-sharper](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/nedi-sharper.slangp)|2x|
-|[fast-bilateral-nedi](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/fast-bilateral-nedi.slangp)|2x|
+Rust implementations
+| Name                                                            | Scale   | Alpha   |
+|-----------------------------------------------------------------|---------|---------|
+| [rust-xbrz](https://crates.io/crates/xbrz-rs)                   | 2x - 6x | **yes** |
+| [rust-xbr](https://crates.io/crates/xbr)                        | 2x      | **yes** |
+| [rust-scalenx](https://crates.io/crates/magnify)                | 2x - 3x | -       |
+| [rust-eagle](https://crates.io/crates/magnify)                  | 2x      | -       |
+| [rust-mmpx](https://crates.io/crates/mmpx)                      | 2x      | -       |
+| [rust-hqx](https://github.com/CryZe/wasmboy-rs/tree/master/hqx) | 2x - 4x | **yes** |
+
+Shaders
+| Name                                                                                                                                                              | Scale   | Alpha   |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------|
+| **scalefx:**                                                                                                                                                      |         |         |
+| [scalefx-hybrid](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/scalefx-hybrid.slangp)                                              | 3x      | -       |
+| [scalefx+rAA](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/scalefx+rAA.slangp)                                                    | 3x      | -       |
+| [scalefx](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/scalefx.slangp)                                                            | 3x      | -       |
+| [scalefx-9x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/scalefx-9x.slangp)                                                      | 9x      | -       |
+| [scalefx-old](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/shaders/old/scalefx.slangp)                                            | 3x      | -       |
+| [scalefx-9x-old](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalefx/shaders/old/scalefx-9x.slangp)                                      | 9x      | -       |
+| **hqx:**                                                                                                                                                          |         |         |
+| [hq3x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/hqx/hq3x.slangp)                                                                      | 3x      | -       |
+| [hq2x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/hqx/hq2x.slangp)                                                                      | 2x      | -       |
+| [hq2x-halphon](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/hqx/hq2x-halphon.slangp)                                                      | 2x      | -       |
+| [hq4x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/hqx/hq4x.slangp)                                                                      | 4x      | -       |
+| **xbrz:**                                                                                                                                                         |         |         |
+| [2xbrz-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/2xbrz-linear.slangp)                                                     | 2x      | -       |
+| [4xbrz-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/4xbrz-linear.slangp)                                                     | 4x      | -       |
+| [5xbrz-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/5xbrz-linear.slangp)                                                     | 5x      | -       |
+| [6xbrz-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/6xbrz-linear.slangp)                                                     | 6x      | -       |
+| [xbrz-freescale](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/xbrz-freescale.slangp)                                                 | **any** | -       |
+| [xbrz-freescale-multipass](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbrz/xbrz-freescale-multipass.slangp)                             | **any** | -       |
+| **xbr:**                                                                                                                                                          |         |         |
+| [xbr-lv2](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/xbr-lv2.slangp)                                                                | **any** | -       |
+| [xbr-lv2-sharp](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/xbr-lv2-sharp.slangp)                                                    | **any** | -       |
+| [xbr-lv3](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/xbr-lv3.slangp)                                                                | **any** | -       |
+| [xbr-lv3-sharp](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/xbr-lv3-sharp.slangp)                                                    | **any** | -       |
+| [super-xbr](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/super-xbr.slangp)                                                            | **any** | -       |
+| [super-xbr-fast](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/super-xbr-fast.slangp)                                                  | **any** | -       |
+| **scalenx:**                                                                                                                                                      |         |         |
+| [scale2xSFX](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/scale2xSFX.slangp)                                                      | 2x      | -       |
+| [scale2xplus](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/scale2xplus.slangp)                                                    | 2x      | -       |
+| [mmpx](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/mmpx.slangp)                                                                  | 2x      | -       |
+| [scale3x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/scale3x.slangp)                                                            | 3x      | -       |
+| [epx](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/epx.slangp)                                                                    | 2x      | -       |
+| [scale2x](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalenx/scale2x.slangp)                                                            | 2x      | -       |
+| **omniscale:**                                                                                                                                                    |         |         |
+| [omniscale](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/omniscale/omniscale.slangp)                                                      | **any** | **yes** |
+| [omniscale-legacy](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/omniscale/omniscale-legacy.slangp)                                        | **any** | -       |
+| **eagle:**                                                                                                                                                        |         |         |
+| [super-2xsai-fix-pixel-shift](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/super-2xsai-fix-pixel-shift.slangp)                      | 2x      | -       |
+| [2xsai](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/2xsai.slangp)                                                                  | 2x      | -       |
+| [super-2xsai](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/super-2xsai.slangp)                                                      | 2x      | -       |
+| [2xsai-fix-pixel-shift](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/2xsai-fix-pixel-shift.slangp)                                  | 2x      | -       |
+| [supereagle](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/eagle/supereagle.slangp)                                                        | **any** | -       |
+| **sabr:**                                                                                                                                                         |         |         |
+| [sabr-hybrid-deposterize](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/sabr/sabr-hybrid-deposterize.slangp)                               | **any** | -       |
+| [sabr](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/sabr/sabr.slangp)                                                                     | **any** | -       |
+| **xsoft:**                                                                                                                                                        |         |         |
+| [4xsoft](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsoft/4xsoft.slangp)                                                                | 4x      | -       |
+| [4xsoftSdB](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsoft/4xsoftSdB.slangp)                                                          | 4x      | -       |
+| **scalehq:**                                                                                                                                                      |         |         |
+| [4xScaleHQ](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalehq/4xScaleHQ.slangp)                                                        | 4x      | -       |
+| [2xScaleHQ](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/scalehq/2xScaleHQ.slangp)                                                        | 2x      | -       |
+| **xsal:**                                                                                                                                                         |         |         |
+| [2xsal](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsal/2xsal.slangp)                                                                   | 2x      | -       |
+| [4xsal-level2](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsal/4xsal-level2.slangp)                                                     | 4x      | -       |
+| [4xsal-level2-hq](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xsal/4xsal-level2-hq.slangp)                                               | 4x      | -       |
+| **fsr:**                                                                                                                                                          |         |         |
+| [smaa+fsr](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/fsr/smaa+fsr.slangp)                                                              | **any** | -       |
+| [fsr](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/fsr/fsr.slangp)                                                                        | **any** | -       |
+| [fsr-easu](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/fsr/fsr-easu.slangp)                                                              | **any** | -       |
+| **cleanEdge:**                                                                                                                                                    |         |         |
+| [cleanEdge-scale](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/cleanEdge/cleanEdge-scale.slangp)                                          | **any** | -       |
+| **ddt:**                                                                                                                                                          |         |         |
+| [ddt-jinc-linear](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt-jinc-linear.slangp)                                                | **any** | -       |
+| [cut](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/cut.slangp)                                                                        | **any** | -       |
+| [3-point](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/3-point.slangp)                                                                | **any** | -       |
+| [ddt-jinc](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt-jinc.slangp)                                                              | **any** | -       |
+| [ddt](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt.slangp)                                                                        | **any** | -       |
+| [ddt-extended](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt-extended.slangp)                                                      | **any** | -       |
+| [ddt-xbr-lv1](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/ddt/ddt-xbr-lv1.slangp)                                                        | **any** | -       |
+| **nnedi3:**                                                                                                                                                       |         |         |
+| [nnedi3-nns32-2x-rgb-nns32-4x-luma](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns32-2x-rgb-nns32-4x-luma.slangp)         | 4x      | -       |
+| [nnedi3-nns64-2x-nns32-4x-nns16-8x-rgb](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns64-2x-nns32-4x-nns16-8x-rgb.slangp) | 8x      | -       |
+| [nnedi3-nns16-2x-luma](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns16-2x-luma.slangp)                                   | 2x      | -       |
+| [nnedi3-nns16-4x-luma](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns16-4x-luma.slangp)                                   | 4x      | -       |
+| [nnedi3-nns32-4x-rgb](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns32-4x-rgb.slangp)                                     | 4x      | -       |
+| [nnedi3-nns16-2x-rgb](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns16-2x-rgb.slangp)                                     | 2x      | -       |
+| [nnedi3-nns64-2x-nns32-4x-rgb](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nnedi3/nnedi3-nns64-2x-nns32-4x-rgb.slangp)                   | 4x      | -       |
+| **nedi:**                                                                                                                                                         |         |         |
+| [nedi-hybrid-sharper](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/nedi-hybrid-sharper.slangp)                                       | 2x      | -       |
+| [nedi-hybrid](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/nedi-hybrid.slangp)                                                       | 2x      | -       |
+| [nedi](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/nedi.slangp)                                                                     | 2x      | -       |
+| [nedi-sharper](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/nedi-sharper.slangp)                                                     | 2x      | -       |
+| [fast-bilateral-nedi](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/nedi/fast-bilateral-nedi.slangp)                                       | 2x      | -       |
 
 # Respect
 - [librashader - cool library which implements RetroArch shader presets.](https://github.com/SnowflakePowered/librashader)

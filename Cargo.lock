@@ -1832,6 +1832,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "ra-pixelart-scale"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "gl",
+ "gl-headless",
+ "image",
+ "librashader",
+ "librashader-common",
+ "librashader-runtime",
+ "librashader-runtime-gl",
+ "num-traits",
+ "serde_json",
+]
+
+[[package]]
 name = "radium"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2721,22 +2737,6 @@ name = "xml-rs"
 version = "0.8.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "791978798f0597cfc70478424c2b4fdc2b7a8024aaff78497ef00f24ef674193"
-
-[[package]]
-name = "xuj"
-version = "0.1.0"
-dependencies = [
- "clap",
- "gl",
- "gl-headless",
- "image",
- "librashader",
- "librashader-common",
- "librashader-runtime",
- "librashader-runtime-gl",
- "num-traits",
- "serde_json",
-]
 
 [[package]]
 name = "zerocopy"

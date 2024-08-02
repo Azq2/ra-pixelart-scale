@@ -28,8 +28,6 @@
 
 	"2xsal":						[2, "edge-smoothing/xsal/2xsal.slangp"],
 	"4xsal-level2":					[4, "edge-smoothing/xsal/4xsal-level2.slangp"],
-	"4xsal-level2-crt":				[4, "edge-smoothing/xsal/4xsal-level2-crt.slangp"],
-	"2xsal-level2-crt":				[2, "edge-smoothing/xsal/2xsal-level2-crt.slangp"],
 	"4xsal-level2-hq":				[4, "edge-smoothing/xsal/4xsal-level2-hq.slangp"],
 
 	"smaa+fsr":						[2, "edge-smoothing/fsr/smaa+fsr.slangp"],
@@ -65,13 +63,6 @@
 	"nedi-hybrid":								[2, "edge-smoothing/nedi/nedi-hybrid.slangp"],
 	"nedi":										[2, "edge-smoothing/nedi/nedi.slangp"],
 	"nedi-sharper":								[2, "edge-smoothing/nedi/nedi-sharper.slangp"],
-	"bilateral-variant6":						[2, "edge-smoothing/nedi/presets/bilateral-variant6.slangp"],
-	"bilateral-variant2":						[2, "edge-smoothing/nedi/presets/bilateral-variant2.slangp"],
-	"bilateral-variant3":						[2, "edge-smoothing/nedi/presets/bilateral-variant3.slangp"],
-	"bilateral-variant4":						[2, "edge-smoothing/nedi/presets/bilateral-variant4.slangp"],
-	"bilateral-variant7":						[2, "edge-smoothing/nedi/presets/bilateral-variant7.slangp"],
-	"bilateral-variant":						[2, "edge-smoothing/nedi/presets/bilateral-variant.slangp"],
-	"bilateral-variant5":						[2, "edge-smoothing/nedi/presets/bilateral-variant5.slangp"],
 	"fast-bilateral-nedi":						[2, "edge-smoothing/nedi/fast-bilateral-nedi.slangp"],
 
 	"xbr-lv2":									[2, "edge-smoothing/xbr/xbr-lv2.slangp"],
@@ -87,24 +78,6 @@
 	"6xbrz-linear":								[6, "edge-smoothing/xbrz/6xbrz-linear.slangp"],
 	"xbrz-freescale":							[6, "edge-smoothing/xbrz/xbrz-freescale.slangp"],
 	"xbrz-freescale-multipass":					[6, "edge-smoothing/xbrz/xbrz-freescale-multipass.slangp"],
-
-	"xbr-lv1-standalone":						[2, "edge-smoothing/xbr/other presets/xbr-lv1-standalone.slangp"],
-	"4xbr-hybrid-crt":							[4, "edge-smoothing/xbr/other presets/4xbr-hybrid-crt.slangp"],
-	"xbr-lv3-9x-standalone":					[9, "edge-smoothing/xbr/other presets/xbr-lv3-9x-standalone.slangp"],
-	"xbr-lv3-standalone":						[3, "edge-smoothing/xbr/other presets/xbr-lv3-standalone.slangp"],
-	"xbr-lv3-multipass":						[3, "edge-smoothing/xbr/other presets/xbr-lv3-multipass.slangp"],
-	"super-4xbr-3d-4p":							[4, "edge-smoothing/xbr/other presets/super-4xbr-3d-4p.slangp"],
-	"super-4xbr-3d-6p-smoother":				[4, "edge-smoothing/xbr/other presets/super-4xbr-3d-6p-smoother.slangp"],
-	"2xBR-lv1-multipass":						[2, "edge-smoothing/xbr/other presets/2xBR-lv1-multipass.slangp"],
-	"xbr-hybrid":								[2, "edge-smoothing/xbr/other presets/xbr-hybrid.slangp"],
-	"super-2xbr-3d-3p-smoother":				[2, "edge-smoothing/xbr/other presets/super-2xbr-3d-3p-smoother.slangp"],
-	"super-8xbr-3d-6p":							[8, "edge-smoothing/xbr/other presets/super-8xbr-3d-6p.slangp"],
-	"xbr-lv2-hd":								[2, "edge-smoothing/xbr/other presets/xbr-lv2-hd.slangp"],
-	"xbr-mlv4-multipass":						[2, "edge-smoothing/xbr/other presets/xbr-mlv4-multipass.slangp"],
-	"super-2xbr-3d-2p":							[2, "edge-smoothing/xbr/other presets/super-2xbr-3d-2p.slangp"],
-	"xbr-lv3-9x-multipass":						[9, "edge-smoothing/xbr/other presets/xbr-lv3-9x-multipass.slangp"],
-	"xbr-lv2-standalone":						[2, "edge-smoothing/xbr/other presets/xbr-lv2-standalone.slangp"],
-	"xbr-lv2-multipass":						[2, "edge-smoothing/xbr/other presets/xbr-lv2-multipass.slangp"],
 
 	"omniscale":			[2, "edge-smoothing/omniscale/omniscale.slangp"],
 	"omniscale-legacy": 	[2, "edge-smoothing/omniscale/omniscale-legacy.slangp"]

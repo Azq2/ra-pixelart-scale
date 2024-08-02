@@ -1,5 +1,9 @@
 #version 450
 
+/*
+	Anime4k - Luma shader - ported by Hyllian - 2020
+*/
+
 layout(push_constant) uniform Push
 {
 	vec4 SourceSize;
@@ -31,6 +35,11 @@ layout(set = 0, binding = 2) uniform sampler2D Source;
 
 void main()
 {
-   FragColor = texture(Source, vTexCoord).rgba;
-//   FragColor = vec4(texture(Source, vTexCoord).rgb, 1.0);
+	vec4 c0 = texture(Source, vTexCoord);
+	
+	//Quick luminance approximation
+	float lum = (c0.r + c0[0].r + c0.g + c0.g + c0.g + c0.b) / 6;
+	
+	//Computes the luminance and saves it in the unused alpha channel
+	FragColor = vec4(c0.r, c0.g, c0.b, lum);
 }

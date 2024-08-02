@@ -35,6 +35,10 @@ struct Args {
 	#[arg(long)]
 	resize: Option<String>,
 
+	/// Resize method: nearest, triangle, catmullrom, gaussian, lanczos3
+	#[arg(long, default_value = "nearest")]
+	resize_method: String,
+
 	/// Alpha mode: auto, strip, bypass, split
 	#[arg(long, default_value = "split")]
 	alpha: String,
@@ -55,10 +59,10 @@ fn main() -> ExitCode {
 		return ExitCode::from(1);
 	}
 
-	let img = image::open(args.input.as_str()).expect("Failed to load image.");
+	let img = image::open(args.input.as_str()).expect("Failed to load image");
 	let (width, height) = img.dimensions();
 
-	let scaled_img: Option<DynamicImage>;
+	let mut scaled_img: Option<DynamicImage>;
 	if args.alpha == "split" {
 		let (rgb_img, alpha_img) = split_alpha(&img);
 		let scaled_rgb_img = scale_image(&args, &rgb_img);
@@ -81,30 +85,44 @@ fn main() -> ExitCode {
 		return ExitCode::from(1);
 	}
 
+	if !args.resize.is_none() {
+		let new_width: u32;
+		let new_height: u32;
+
+		if args.resize.as_ref().unwrap().ends_with("%") {
+			let cleaned_input: String = args.resize.unwrap().chars()
+				.filter(|c| c.is_digit(10) || *c == '.')
+				.collect();
+			let scale = cleaned_input.parse::<f64>().expect("Invalid --resize value") / 100.0;
+			new_width = ((width as f64) * scale).round() as u32;
+			new_height = ((height as f64) * scale).round() as u32;
+		} else {
+			let resize_tmp = args.resize.as_ref().unwrap();
+			new_width = resize_tmp.split("x").nth(0).unwrap().parse::<u32>().expect("Invalid --resize value");
+			new_height = resize_tmp.split("x").nth(1).unwrap().parse::<u32>().expect("Invalid --resize value");
+		}
+
+		let resize_method = get_resize_method_by_name(args.resize_method.as_str()).expect("Invalid --resize-method");
+		scaled_img = Some(scaled_img.unwrap().resize(new_width, new_height, resize_method));
+	}
+
+
 	let (scaled_width, scaled_height) = scaled_img.as_ref().unwrap().dimensions();
 	println!("Image saved to: {} [{}x{} -> {}x{}]", args.output, width, height, scaled_width, scaled_height);
-	scaled_img.unwrap().save(args.output).expect("Failed to save image.");
+	scaled_img.unwrap().save(args.output).expect("Failed to save image");
 	return ExitCode::from(0);
 }
 
 fn scale_image(args: &Args, img: &DynamicImage) -> Option<DynamicImage> {
-	let out_width: u32;
-	let out_height: u32;
 	let default_scale: f64 = get_default_scale(args);
 	let (width, height) = img.dimensions();
 
-	if args.resize.is_none() {
-		let mut output_scale = args.scale;
-		if args.scale <= 0.0 {
-			output_scale = default_scale;
-		}
-		out_width = ((width as f64) * output_scale).round() as u32;
-		out_height = ((height as f64) * output_scale).round() as u32;
-	} else {
-		let resize_tmp = args.resize.clone().unwrap();
-		out_width = resize_tmp.split("x").nth(0).unwrap().parse::<u32>().unwrap();
-		out_height = resize_tmp.split("x").nth(1).unwrap().parse::<u32>().unwrap();
+	let mut output_scale = args.scale;
+	if args.scale <= 0.0 {
+		output_scale = default_scale;
 	}
+	let out_width = ((width as f64) * output_scale).round() as u32;
+	let out_height = ((height as f64) * output_scale).round() as u32;
 
 	if args.custom_preset.is_none() && args.method.starts_with("rust-") {
 		if args.method == "rust-xbrz" {
@@ -414,6 +432,17 @@ unsafe fn create_texture(width: u32, height: u32) -> (GLuint, GLuint) {
 	}
 
 	return (framebuffer, texture);
+}
+
+fn get_resize_method_by_name(filter_name: &str) -> Option<image::imageops::FilterType> {
+	match filter_name.to_lowercase().as_str() {
+		"nearest"		=> Some(image::imageops::FilterType::Nearest),
+		"triangle"		=> Some(image::imageops::FilterType::Triangle),
+		"catmullrom"	=> Some(image::imageops::FilterType::CatmullRom),
+		"gaussian"		=> Some(image::imageops::FilterType::Gaussian),
+		"lanczos3"		=> Some(image::imageops::FilterType::Lanczos3),
+		_				=> None,
+	}
 }
 
 fn u32_vec_to_u8_vec(input: Vec<u32>) -> Vec<u8> {

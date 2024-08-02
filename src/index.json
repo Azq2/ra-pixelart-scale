@@ -163,64 +163,64 @@
     "name": "xbrz-freescale",
     "category": "xbrz",
     "file": "edge-smoothing/xbrz/xbrz-freescale.slangp",
-    "minScale": 6,
-    "maxScale": 6,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "xbrz-freescale-multipass": {
     "name": "xbrz-freescale-multipass",
     "category": "xbrz",
     "file": "edge-smoothing/xbrz/xbrz-freescale-multipass.slangp",
-    "minScale": 6,
-    "maxScale": 6,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "xbr-lv2": {
     "name": "xbr-lv2",
     "category": "xbr",
     "file": "edge-smoothing/xbr/xbr-lv2.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "xbr-lv2-sharp": {
     "name": "xbr-lv2-sharp",
     "category": "xbr",
     "file": "edge-smoothing/xbr/xbr-lv2-sharp.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "xbr-lv3": {
     "name": "xbr-lv3",
     "category": "xbr",
     "file": "edge-smoothing/xbr/xbr-lv3.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "xbr-lv3-sharp": {
     "name": "xbr-lv3-sharp",
     "category": "xbr",
     "file": "edge-smoothing/xbr/xbr-lv3-sharp.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "super-xbr": {
     "name": "super-xbr",
     "category": "xbr",
     "file": "edge-smoothing/xbr/super-xbr.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "super-xbr-fast": {
     "name": "super-xbr-fast",
     "category": "xbr",
     "file": "edge-smoothing/xbr/super-xbr-fast.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "scale2xSFX": {
@@ -275,16 +275,16 @@
     "name": "omniscale",
     "category": "omniscale",
     "file": "edge-smoothing/omniscale/omniscale.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": true
   },
   "omniscale-legacy": {
     "name": "omniscale-legacy",
     "category": "omniscale",
     "file": "edge-smoothing/omniscale/omniscale-legacy.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "super-2xsai-fix-pixel-shift": {
@@ -323,24 +323,24 @@
     "name": "supereagle",
     "category": "eagle",
     "file": "edge-smoothing/eagle/supereagle.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "sabr-hybrid-deposterize": {
     "name": "sabr-hybrid-deposterize",
     "category": "sabr",
     "file": "edge-smoothing/sabr/sabr-hybrid-deposterize.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "sabr": {
     "name": "sabr",
     "category": "sabr",
     "file": "edge-smoothing/sabr/sabr.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "4xsoft": {
@@ -403,88 +403,88 @@
     "name": "smaa+fsr",
     "category": "fsr",
     "file": "edge-smoothing/fsr/smaa+fsr.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "fsr": {
     "name": "fsr",
     "category": "fsr",
     "file": "edge-smoothing/fsr/fsr.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "fsr-easu": {
     "name": "fsr-easu",
     "category": "fsr",
     "file": "edge-smoothing/fsr/fsr-easu.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "cleanEdge-scale": {
     "name": "cleanEdge-scale",
     "category": "cleanEdge",
     "file": "edge-smoothing/cleanEdge/cleanEdge-scale.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "ddt-jinc-linear": {
     "name": "ddt-jinc-linear",
     "category": "ddt",
     "file": "edge-smoothing/ddt/ddt-jinc-linear.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "cut": {
     "name": "cut",
     "category": "ddt",
     "file": "edge-smoothing/ddt/cut.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "3-point": {
     "name": "3-point",
     "category": "ddt",
     "file": "edge-smoothing/ddt/3-point.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "ddt-jinc": {
     "name": "ddt-jinc",
     "category": "ddt",
     "file": "edge-smoothing/ddt/ddt-jinc.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "ddt": {
     "name": "ddt",
     "category": "ddt",
     "file": "edge-smoothing/ddt/ddt.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "ddt-extended": {
     "name": "ddt-extended",
     "category": "ddt",
     "file": "edge-smoothing/ddt/ddt-extended.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "ddt-xbr-lv1": {
     "name": "ddt-xbr-lv1",
     "category": "ddt",
     "file": "edge-smoothing/ddt/ddt-xbr-lv1.slangp",
-    "minScale": 2,
-    "maxScale": 2,
+    "minScale": 1,
+    "maxScale": 100,
     "alpha": false
   },
   "nnedi3-nns32-2x-rgb-nns32-4x-luma": {

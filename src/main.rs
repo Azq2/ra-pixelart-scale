@@ -145,10 +145,19 @@ fn scale_image(args: &Args, scale_method: &ScaleMethod, img: &DynamicImage) -> O
 
 	let mut output_scale = args.scale;
 	if args.scale <= 0.0 {
-		output_scale = scale_method.scale_min;
+		output_scale = f64::max(2.0, scale_method.scale_min);
 	}
 	let out_width = ((width as f64) * output_scale).round() as u32;
 	let out_height = ((height as f64) * output_scale).round() as u32;
+
+	if scale_method.scale_max != 100.0 {
+		if output_scale.ceil() != output_scale || output_scale < scale_method.scale_min || output_scale > scale_method.scale_max {
+			eprintln!(
+				"Warning: scale {} is not supported by {}, real scale changed to {} and then resized with nearest-neighbor.",
+				output_scale, scale_method.name.clone(), scale_method.scale_max
+			);
+		}
+	}
 
 	if args.custom_preset.is_none() && args.method.starts_with("rust-") {
 		if args.method == "rust-xbrz" {
@@ -196,7 +205,6 @@ fn scale_xbrz(img: &DynamicImage, out_width: u32, out_height: u32) -> Option<Dyn
 	let mut scaled_image = DynamicImage::from(tmp_buffer);
 
 	if scaled_width != out_width || scaled_height != out_height {
-		eprintln!("Warning: scale {} is not supported by rust-xbrz, real scale changed to {} and then resized with nearest-neighbor.", real_scale, scale);
 		scaled_image = scaled_image.resize(out_width, out_height, image::imageops::FilterType::Nearest);
 	}
 
@@ -215,8 +223,6 @@ fn scale_xbr(img: &DynamicImage, out_width: u32, out_height: u32) -> Option<Dyna
 	let mut scaled_image = DynamicImage::from(tmp_buffer);
 
 	if scaled_block.width != out_width || scaled_block.height != out_height {
-		let real_scale = (out_width as f32) / (width as f32);
-		eprintln!("Warning: scale {} is not supported by rust-xbr, real scale changed to 2 and then resized with nearest-neighbor.", real_scale);
 		scaled_image = scaled_image.resize(out_width, out_height, image::imageops::FilterType::Nearest);
 	}
 
@@ -239,7 +245,6 @@ fn scale_scalenx(img: &DynamicImage, out_width: u32, out_height: u32) -> Option<
 
 	let (scaled_width, scaled_height) = scaled_image.dimensions();
 	if scaled_width != out_width || scaled_height != out_height {
-		eprintln!("Warning: scale {} is not supported by rust-scalenx, real scale changed to {} and then resized with nearest-neighbor.", real_scale, scale);
 		scaled_image = scaled_image.resize(out_width, out_height, image::imageops::FilterType::Nearest);
 	}
 
@@ -247,13 +252,10 @@ fn scale_scalenx(img: &DynamicImage, out_width: u32, out_height: u32) -> Option<
 }
 
 fn scale_eagle(img: &DynamicImage, out_width: u32, out_height: u32) -> Option<DynamicImage> {
-	let (width, _height) = img.dimensions();
 	let mut scaled_image = magnify::convert(img.clone(), magnify::Algorithm::Eagle);
 
 	let (scaled_width, scaled_height) = scaled_image.dimensions();
 	if scaled_width != out_width || scaled_height != out_height {
-		let real_scale = (out_width as f32) / (width as f32);
-		eprintln!("Warning: scale {} is not supported by rust-eagle, real scale changed to {} and then resized with nearest-neighbor.", real_scale, 2);
 		scaled_image = scaled_image.resize(out_width, out_height, image::imageops::FilterType::Nearest);
 	}
 
@@ -261,14 +263,11 @@ fn scale_eagle(img: &DynamicImage, out_width: u32, out_height: u32) -> Option<Dy
 }
 
 fn scale_mmpx(img: &DynamicImage, out_width: u32, out_height: u32) -> Option<DynamicImage> {
-	let (width, _height) = img.dimensions();
 	let tmp_buffer = mmpx::magnify(&img.to_rgba8());
 	let mut scaled_image = DynamicImage::from(tmp_buffer);
 
 	let (scaled_width, scaled_height) = scaled_image.dimensions();
 	if scaled_width != out_width || scaled_height != out_height {
-		let real_scale = (out_width as f32) / (width as f32);
-		eprintln!("Warning: scale {} is not supported by rust-mmpx, real scale changed to {} and then resized with nearest-neighbor.", real_scale, 2);
 		scaled_image = scaled_image.resize(out_width, out_height, image::imageops::FilterType::Nearest);
 	}
 
@@ -303,7 +302,6 @@ fn scale_hqx(img: &DynamicImage, out_width: u32, out_height: u32) -> Option<Dyna
 
 	let (scaled_width, scaled_height) = scaled_image.dimensions();
 	if scaled_width != out_width || scaled_height != out_height {
-		eprintln!("Warning: scale {} is not supported by rust-hqx, real scale changed to {} and then resized with nearest-neighbor.", real_scale, scale);
 		scaled_image = scaled_image.resize(out_width, out_height, image::imageops::FilterType::Nearest);
 	}
 

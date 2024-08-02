@@ -11,11 +11,12 @@ Usage: ra-pixelart-scale [OPTIONS] --input <INPUT> --output <OUTPUT>
 
 Options:
   -m, --method <METHOD>                Scale method [default: scalefx-9x]
-  -i, --input <INPUT>                  Input one frame
+  -i, --input <INPUT>                  Input image
   -s, --scale <SCALE>                  Output scale [default: 0]
   -o, --output <OUTPUT>                Output filename
-  -a, --alpha <ALPHA>                  Alpha saving mode: none, split [default: split]
-      --custom-preset <CUSTOM_PRESET>  Custom .slangp file [default: ]
+      --resize <RESIZE>                Output resize
+      --alpha <ALPHA>                  Alpha saving mode: none, split [default: split]
+      --custom-preset <CUSTOM_PRESET>  Custom .slangp file
   -h, --help                           Print help
   -V, --version                        Print version
 ```
@@ -213,3 +214,6 @@ Pass custom `--scale` only for specific scale methods which can work with any sc
 |xbr-lv2-standalone|2x|[edge-smoothing/xbr/other presets/xbr-lv2-standalone.slangp](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/other%20presets/xbr-lv2-standalone.slangp)|
 |xbr-lv2-multipass|2x|[edge-smoothing/xbr/other presets/xbr-lv2-multipass.slangp](https://github.com/libretro/slang-shaders/tree/master/edge-smoothing/xbr/other%20presets/xbr-lv2-multipass.slangp)|
 
+# Respect
+- [librashader - cool library which implements RetroArch shader presets.](https://github.com/SnowflakePowered/librashader)
+- [RetroArch - greatest emulators forntend.](https://github.com/libretro/RetroArch)

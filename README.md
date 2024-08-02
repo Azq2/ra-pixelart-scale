@@ -5,9 +5,9 @@ This tool allows to use RetroArch shaders for static images.
 
 # Usage
 ```
-Pixel Art scaling algorithms from RetroArch
+PixelArt scaling algorithms from RetroArch
 
-Usage: ra-pixelart-scale [OPTIONS] --input <INPUT> --output <OUTPUT>
+Usage: ra-pixelart-scale [OPTIONS]
 
 Options:
   -m, --method <METHOD>                Scale method [default: scalefx-9x]
@@ -17,7 +17,7 @@ Options:
   -o, --output <OUTPUT>                Output filename
       --resize <RESIZE>                Resize after scale (WxH or Nx)
       --resize-method <RESIZE_METHOD>  Resize method: nearest, triangle, catmullrom, gaussian, lanczos3 [default: nearest]
-      --alpha <ALPHA>                  Alpha mode: auto, strip, bypass, split [default: split]
+      --alpha <ALPHA>                  Alpha mode: auto, strip, bypass, split [default: auto]
       --custom-preset <CUSTOM_PRESET>  Custom .slangp file
   -h, --help                           Print help
   -V, --version                        Print version

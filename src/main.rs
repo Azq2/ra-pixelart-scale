@@ -15,7 +15,7 @@ struct Args {
 	#[arg(short, long, default_value = "scalefx-9x")]
 	method: String,
 
-	/// Input one frame
+	/// Input image
 	#[arg(short, long)]
 	input: String,
 
@@ -27,13 +27,17 @@ struct Args {
 	#[arg(short, long)]
 	output: String,
 
+	/// Output resize
+	#[arg(long)]
+	resize: Option<String>,
+
 	/// Alpha saving mode: none, split
-	#[arg(short, long, default_value = "none")]
+	#[arg(long, default_value = "split")]
 	alpha: String,
 
 	/// Custom .slangp file
-	#[arg(long, default_value = "")]
-	custom_preset: String,
+	#[arg(long)]
+	custom_preset: Option<String>,
 }
 
 #[gl_headless(version = "3.3")]
@@ -45,10 +49,10 @@ unsafe fn main() -> ExitCode {
 	let rgba_img = image::open(args.input.as_str()).expect("Failed to load image");
 	let (width, height) = rgba_img.dimensions();
 
-	let mut preset_path = PathBuf::from(args.custom_preset.as_str());
-	let mut default_scale = 1f64;
+	let preset_path: PathBuf;
+	let default_scale: f64;
 
-	if args.custom_preset == "" {
+	if args.custom_preset.is_none() {
 		let preset_filename = shaders_index[args.method.clone()][1].as_str();
 		if preset_filename.is_none() {
 			eprintln!("Scaling method {} not found.", args.method);
@@ -56,6 +60,9 @@ unsafe fn main() -> ExitCode {
 		}
 		preset_path = Path::new(shaders_dir.as_str()).join(preset_filename.unwrap().to_string());
 		default_scale = shaders_index[args.method.clone()][0].as_f64().unwrap();
+	} else {
+		preset_path = PathBuf::from(args.custom_preset.unwrap().as_str());
+		default_scale = 1.0;
 	}
 
 	let mut output_scale = args.scale;
@@ -122,7 +129,7 @@ unsafe fn process_image(
 	gl::BindTexture(gl::TEXTURE_2D, rendered.handle);
 	gl::TexSubImage2D(gl::TEXTURE_2D, 0, 0, 0, rendered.size.width as _, rendered.size.height as _, gl::RGBA, gl::UNSIGNED_BYTE, data.as_ptr() as _);
 
-	filter.frame(&rendered, &viewport, 0, None).expect("Can't process shader.");
+	filter.frame(&rendered, &viewport, 120, None).expect("Can't process shader.");
 
 	let mut tmp_buffer = vec![0u8; (output_size.width * output_size.height * 4) as usize];
 	gl::BindFramebuffer(gl::FRAMEBUFFER, fbo);

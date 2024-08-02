@@ -79,7 +79,7 @@ ra-pixelart-scale --custom-preset shaders/presets/crt-royale-pal-r57shell.slangp
 Since this tool uses OpenGL, then a display server is required for running. Alternatively, you can use Xvfb for running this tool on a server.
 
 ```bash
-xvfb-run target/debug/ra-pixelart-scale -i /tmp/lenna.png -o /tmp/test.png
+xvfb-run ra-pixelart-scale -i /tmp/lenna.png -o /tmp/test.png
 ```
 
 # Supported scaling methods

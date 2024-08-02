@@ -15,7 +15,7 @@ Options:
   -i, --input <INPUT>                  Input image
   -s, --scale <SCALE>                  Output scale [default: 0]
   -o, --output <OUTPUT>                Output filename
-      --resize <RESIZE>                Resize after scale (WxH or Nx)
+      --resize <RESIZE>                Resize after scale (WxH or %)
       --resize-method <RESIZE_METHOD>  Resize method: nearest, triangle, catmullrom, gaussian, lanczos3 [default: nearest]
       --alpha <ALPHA>                  Alpha mode: auto, strip, bypass, split [default: auto]
       --custom-preset <CUSTOM_PRESET>  Custom .slangp file

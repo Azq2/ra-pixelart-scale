@@ -7,10 +7,15 @@ edition = "2021"
 clap = { version = "4.5.13", features = ["derive"] }
 gl = "0.14.0"
 gl-headless = "0.2.2"
-image = "0.25.2"
 librashader = "0.2.8"
 librashader-common = "0.2.8"
 librashader-runtime = "0.2.8"
 librashader-runtime-gl = "0.2.8"
+magnify = { git = "https://github.com/yet-another-org-with-forks/magnify-rs" }
 num-traits = "0.2.19"
 serde_json = "1.0.122"
+xbr = "0.2.4"
+xbrz-rs = "0.1.0"
+hqx = { git = "https://github.com/CryZe/wasmboy-rs" }
+image = "0.25.2"
+mmpx = { git = "https://github.com/yet-another-org-with-forks/mmpx-rs" }

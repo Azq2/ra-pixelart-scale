@@ -1,0 +1,86 @@
+{
+	"xbrz":							[2, "native:xbrz"],
+
+	"scalefx-hybrid":				[3, "edge-smoothing/scalefx/scalefx-hybrid.slangp"],
+	"scalefx+rAA":					[3, "edge-smoothing/scalefx/scalefx+rAA.slangp"],
+	"scalefx":						[3, "edge-smoothing/scalefx/scalefx.slangp"],
+	"scalefx-9x":					[9, "edge-smoothing/scalefx/scalefx-9x.slangp"],
+	"scalefx-old":					[3, "edge-smoothing/scalefx/shaders/old/scalefx.slangp"],
+	"scalefx-9x-old":				[9, "edge-smoothing/scalefx/shaders/old/scalefx-9x.slangp"],
+
+	"hq3x":							[3, "edge-smoothing/hqx/hq3x.slangp"],
+	"hq2x":							[2, "edge-smoothing/hqx/hq2x.slangp"],
+	"hq2x-halphon":					[2, "edge-smoothing/hqx/hq2x-halphon.slangp"],
+	"hq4x":							[4, "edge-smoothing/hqx/hq4x.slangp"],
+
+	"2xbrz-linear":								[2, "edge-smoothing/xbrz/2xbrz-linear.slangp"],
+	"4xbrz-linear":								[4, "edge-smoothing/xbrz/4xbrz-linear.slangp"],
+	"5xbrz-linear":								[5, "edge-smoothing/xbrz/5xbrz-linear.slangp"],
+	"6xbrz-linear":								[6, "edge-smoothing/xbrz/6xbrz-linear.slangp"],
+	"xbrz-freescale":							[6, "edge-smoothing/xbrz/xbrz-freescale.slangp"],
+	"xbrz-freescale-multipass":					[6, "edge-smoothing/xbrz/xbrz-freescale-multipass.slangp"],
+
+	"xbr-lv2":									[2, "edge-smoothing/xbr/xbr-lv2.slangp"],
+	"xbr-lv2-sharp":							[2, "edge-smoothing/xbr/xbr-lv2-sharp.slangp"],
+	"xbr-lv3":									[2, "edge-smoothing/xbr/xbr-lv3.slangp"],
+	"xbr-lv3-sharp":							[2, "edge-smoothing/xbr/xbr-lv3-sharp.slangp"],
+	"super-xbr":								[2, "edge-smoothing/xbr/super-xbr.slangp"],
+	"super-xbr-fast":							[2, "edge-smoothing/xbr/super-xbr-fast.slangp"],
+
+	"scale2xSFX":					[2, "edge-smoothing/scalenx/scale2xSFX.slangp"],
+	"scale2xplus":					[2, "edge-smoothing/scalenx/scale2xplus.slangp"],
+	"mmpx":							[2, "edge-smoothing/scalenx/mmpx.slangp"],
+	"scale3x":						[3, "edge-smoothing/scalenx/scale3x.slangp"],
+	"epx":							[2, "edge-smoothing/scalenx/epx.slangp"],
+	"scale2x":						[2, "edge-smoothing/scalenx/scale2x.slangp"],
+
+	"omniscale":			[2, "edge-smoothing/omniscale/omniscale.slangp"],
+	"omniscale-legacy": 	[2, "edge-smoothing/omniscale/omniscale-legacy.slangp"],
+
+	"super-2xsai-fix-pixel-shift":	[2, "edge-smoothing/eagle/super-2xsai-fix-pixel-shift.slangp"],
+	"2xsai":						[2, "edge-smoothing/eagle/2xsai.slangp"],
+	"super-2xsai":					[2, "edge-smoothing/eagle/super-2xsai.slangp"],
+	"2xsai-fix-pixel-shift":		[2, "edge-smoothing/eagle/2xsai-fix-pixel-shift.slangp"],
+	"supereagle":					[2, "edge-smoothing/eagle/supereagle.slangp"],
+
+	"sabr-hybrid-deposterize":		[2, "edge-smoothing/sabr/sabr-hybrid-deposterize.slangp"],
+	"sabr":							[2, "edge-smoothing/sabr/sabr.slangp"],
+
+	"4xsoft":						[4, "edge-smoothing/xsoft/4xsoft.slangp"],
+	"4xsoftSdB":					[4, "edge-smoothing/xsoft/4xsoftSdB.slangp"],
+
+	"4xScaleHQ":					[4, "edge-smoothing/scalehq/4xScaleHQ.slangp"],
+	"2xScaleHQ":					[2, "edge-smoothing/scalehq/2xScaleHQ.slangp"],
+
+	"2xsal":						[2, "edge-smoothing/xsal/2xsal.slangp"],
+	"4xsal-level2":					[4, "edge-smoothing/xsal/4xsal-level2.slangp"],
+	"4xsal-level2-hq":				[4, "edge-smoothing/xsal/4xsal-level2-hq.slangp"],
+
+	"smaa+fsr":						[2, "edge-smoothing/fsr/smaa+fsr.slangp"],
+	"fsr":							[2, "edge-smoothing/fsr/fsr.slangp"],
+	"fsr-easu":						[2, "edge-smoothing/fsr/fsr-easu.slangp"],
+
+	"cleanEdge-scale":				[2, "edge-smoothing/cleanEdge/cleanEdge-scale.slangp"],
+
+	"ddt-jinc-linear":				[2, "edge-smoothing/ddt/ddt-jinc-linear.slangp"],
+	"cut":							[2, "edge-smoothing/ddt/cut.slangp"],
+	"3-point":						[2, "edge-smoothing/ddt/3-point.slangp"],
+	"ddt-jinc":						[2, "edge-smoothing/ddt/ddt-jinc.slangp"],
+	"ddt":							[2, "edge-smoothing/ddt/ddt.slangp"],
+	"ddt-extended":					[2, "edge-smoothing/ddt/ddt-extended.slangp"],
+	"ddt-xbr-lv1":					[2, "edge-smoothing/ddt/ddt-xbr-lv1.slangp"],
+
+	"nnedi3-nns32-2x-rgb-nns32-4x-luma":		[4, "edge-smoothing/nnedi3/nnedi3-nns32-2x-rgb-nns32-4x-luma.slangp"],
+	"nnedi3-nns64-2x-nns32-4x-nns16-8x-rgb":	[8, "edge-smoothing/nnedi3/nnedi3-nns64-2x-nns32-4x-nns16-8x-rgb.slangp"],
+	"nnedi3-nns16-2x-luma":						[2, "edge-smoothing/nnedi3/nnedi3-nns16-2x-luma.slangp"],
+	"nnedi3-nns16-4x-luma":						[4, "edge-smoothing/nnedi3/nnedi3-nns16-4x-luma.slangp"],
+	"nnedi3-nns32-4x-rgb":						[4, "edge-smoothing/nnedi3/nnedi3-nns32-4x-rgb.slangp"],
+	"nnedi3-nns16-2x-rgb":						[2, "edge-smoothing/nnedi3/nnedi3-nns16-2x-rgb.slangp"],
+	"nnedi3-nns64-2x-nns32-4x-rgb":				[4, "edge-smoothing/nnedi3/nnedi3-nns64-2x-nns32-4x-rgb.slangp"],
+
+	"nedi-hybrid-sharper":						[2, "edge-smoothing/nedi/nedi-hybrid-sharper.slangp"],
+	"nedi-hybrid":								[2, "edge-smoothing/nedi/nedi-hybrid.slangp"],
+	"nedi":										[2, "edge-smoothing/nedi/nedi.slangp"],
+	"nedi-sharper":								[2, "edge-smoothing/nedi/nedi-sharper.slangp"],
+	"fast-bilateral-nedi":						[2, "edge-smoothing/nedi/fast-bilateral-nedi.slangp"]
+}

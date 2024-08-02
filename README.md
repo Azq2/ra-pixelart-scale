@@ -38,7 +38,11 @@ Most shaders don't support the alpha channel and produce a white background. But
 
 This is done by splitting the RGBA image into an RGB + Alpha channel, then each part is scaled separately.
 
-This mode is enabled by default and controlled via `--alpha` argument.
+This mode is controlled via the `--alpha` argument:
+- `--alpha auto` - use `split` mode only if the shader does not support RGBA. Otherwise, use `bypass`.
+- `--alpha split` - split image into Alpha+RGBA and scale separately.
+- `--alpha strip` - strip alpha channel from image.
+- `--alpha bypass` - pass RGBA as-is to shaders.
 
 # Scale value
 
@@ -52,7 +56,7 @@ Pass custom `--scale` only for specific scale methods which can work with any sc
 
 # Resize after scale
 
-You can apply additional for resize after scaling.
+You can do additional resizing after scaling.
 
 ```bash
 # Resize image 9x larger and then scale it back to the original WxH using lanczos3

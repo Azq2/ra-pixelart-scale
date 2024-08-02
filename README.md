@@ -60,6 +60,14 @@ Although this program is designed for image enlargement, you can also use it to 
 ra-pixelart-scale --custom-preset shaders/presets/crt-royale-pal-r57shell.slangp -i /tmp/lenna.png -o /tmp/lenna_crt.png
 ```
 
+# Headless
+
+Since this tool uses OpenGL, then a display server is required for running. Alternatively, you can use Xvfb for running this tool on a server.
+
+```bash
+xvfb-run target/debug/ra-pixelart-scale -i /tmp/lenna.png -o /tmp/test.png
+```
+
 # Supported scaling methods
 | Name    | Scale |
 |---------|-------|

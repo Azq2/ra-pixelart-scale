@@ -40,7 +40,7 @@ struct Args {
 	resize_method: String,
 
 	/// Alpha mode: auto, strip, bypass, split
-	#[arg(long, default_value = "split")]
+	#[arg(long, default_value = "auto")]
 	alpha: String,
 
 	/// Custom .slangp file
@@ -48,12 +48,20 @@ struct Args {
 	custom_preset: Option<String>,
 }
 
+struct ScaleMethod {
+	name: String,
+	file: String,
+	scale_min: f64,
+	scale_max: f64,
+	alpha: bool,
+}
+
 fn main() -> ExitCode {
 	let args = Args::parse();
 
 	if args.list_methods {
-		let shaders_index: serde_json::Value = serde_json::from_str(include_str!("index.json")).unwrap();
-		for (key, _value) in shaders_index.as_object().unwrap() {
+		let config = get_config();
+		for (key, _value) in config.as_object().unwrap() {
 			eprintln!("{}", key);
 		}
 		return ExitCode::from(1);
@@ -62,19 +70,38 @@ fn main() -> ExitCode {
 	let img = image::open(args.input.as_str()).expect("Failed to load image");
 	let (width, height) = img.dimensions();
 
+	let scale_method = get_scaling_method(&args).expect("Invalid --method value");
+	let mut alpha_mode = args.alpha.clone();
+
+	if alpha_mode == "auto" {
+		if scale_method.alpha {
+			alpha_mode = String::from("bypass");
+		} else {
+			alpha_mode = String::from("split");
+		}
+	}
+
 	let mut scaled_img: Option<DynamicImage>;
-	if args.alpha == "split" {
+	if alpha_mode == "split" {
 		let (rgb_img, alpha_img) = split_alpha(&img);
-		let scaled_rgb_img = scale_image(&args, &rgb_img);
-		let scaled_alpha_img = scale_image(&args, &alpha_img);
+		let scaled_rgb_img = scale_image(&args, &scale_method, &rgb_img);
+		let scaled_alpha_img = scale_image(&args, &scale_method, &alpha_img);
 
 		if !scaled_rgb_img.is_none() && !scaled_alpha_img.is_none() {
 			scaled_img = Some(merge_alpha(&scaled_rgb_img.unwrap(), &scaled_alpha_img.unwrap()));
 		} else {
 			scaled_img = None;
 		}
-	} else if args.alpha == "bypass" {
-		scaled_img = scale_image(&args, &img);
+	} else if alpha_mode == "strip" {
+		let (rgb_img, _alpha_img) = split_alpha(&img);
+		let scaled_rgb_img = scale_image(&args, &scale_method, &rgb_img);
+		if !scaled_rgb_img.is_none() {
+			scaled_img = Some(scaled_rgb_img.unwrap());
+		} else {
+			scaled_img = None;
+		}
+	} else if alpha_mode == "bypass" {
+		scaled_img = scale_image(&args, &scale_method, &img);
 	} else {
 		eprintln!("Invalid alpha mode: {}", args.alpha);
 		return ExitCode::from(1);
@@ -113,13 +140,12 @@ fn main() -> ExitCode {
 	return ExitCode::from(0);
 }
 
-fn scale_image(args: &Args, img: &DynamicImage) -> Option<DynamicImage> {
-	let default_scale: f64 = get_default_scale(args);
+fn scale_image(args: &Args, scale_method: &ScaleMethod, img: &DynamicImage) -> Option<DynamicImage> {
 	let (width, height) = img.dimensions();
 
 	let mut output_scale = args.scale;
 	if args.scale <= 0.0 {
-		output_scale = default_scale;
+		output_scale = scale_method.scale_min;
 	}
 	let out_width = ((width as f64) * output_scale).round() as u32;
 	let out_height = ((height as f64) * output_scale).round() as u32;
@@ -138,25 +164,11 @@ fn scale_image(args: &Args, img: &DynamicImage) -> Option<DynamicImage> {
 		} else if args.method == "rust-hqx" {
 			return scale_hqx(img, out_width, out_height);
 		} else {
-			eprintln!("Scaling method {} not found.", args.method);
-			return None;
+			panic!("Internal error?");
 		}
 	} else {
-		let preset_path: PathBuf;
-		if args.custom_preset.is_none() {
-			let shaders_dir = get_shaders_dir();
-			let shaders_index: serde_json::Value = serde_json::from_str(include_str!("index.json")).unwrap();
-
-			let preset_filename = shaders_index[args.method.clone()][1].as_str();
-			if preset_filename.is_none() {
-				eprintln!("Scaling method {} not found.", args.method);
-				return None;
-			}
-			preset_path = Path::new(shaders_dir.as_str()).join(preset_filename.unwrap().to_string());
-		} else {
-			preset_path = PathBuf::from(args.custom_preset.clone().unwrap().as_str());
-		}
-
+		let shaders_dir = get_shaders_dir();
+		let preset_path = Path::new(shaders_dir.as_str()).join(scale_method.file.clone());
 		unsafe {
 			return Some(scale_with_shader(&preset_path, img, out_width, out_height));
 		}
@@ -344,19 +356,30 @@ unsafe fn scale_with_shader(preset_path: &PathBuf, img: &DynamicImage, out_width
 	return DynamicImage::from(buffer);
 }
 
-fn get_default_scale(args: &Args) -> f64 {
-	if args.custom_preset.is_none() && args.method.starts_with("rust-") {
-		return 2.0;
-	} else if !args.custom_preset.is_none() {
-		return 1.0;
+fn get_scaling_method(args: &Args) -> Option<ScaleMethod> {
+	if !args.custom_preset.is_none() {
+		let method: ScaleMethod = ScaleMethod {
+			name: String::from("custom"),
+			file: args.custom_preset.clone().unwrap(),
+			scale_min: 1.0,
+			scale_max: 1.0,
+			alpha: false
+		};
+		return Some(method);
 	} else {
-		let shaders_index: serde_json::Value = serde_json::from_str(include_str!("index.json")).unwrap();
-		let scale = shaders_index[args.method.clone()][0].as_f64();
-		if scale.is_none() {
-			return 2.0;
-		} else {
-			return scale.unwrap();
+		let config = get_config();
+		let method_json = &config[args.method.clone()];
+		if method_json.is_null() {
+			return None;
 		}
+		let method: ScaleMethod = ScaleMethod {
+			name: method_json["name"].as_str().unwrap().to_string(),
+			file: method_json["file"].as_str().unwrap().to_string(),
+			scale_min: method_json["minScale"].as_f64().unwrap(),
+			scale_max: method_json["maxScale"].as_f64().unwrap(),
+			alpha: method_json["alpha"].as_bool().unwrap(),
+		};
+		return Some(method);
 	}
 }
 
@@ -432,6 +455,10 @@ unsafe fn create_texture(width: u32, height: u32) -> (GLuint, GLuint) {
 	}
 
 	return (framebuffer, texture);
+}
+
+fn get_config() -> serde_json::Value {
+	return serde_json::from_str(include_str!("index.json")).unwrap();
 }
 
 fn get_resize_method_by_name(filter_name: &str) -> Option<image::imageops::FilterType> {

@@ -11,12 +11,13 @@ Usage: ra-pixelart-scale [OPTIONS] --input <INPUT> --output <OUTPUT>
 
 Options:
   -m, --method <METHOD>                Scale method [default: scalefx-9x]
+      --list-methods                   List available methods
   -i, --input <INPUT>                  Input image
   -s, --scale <SCALE>                  Output scale [default: 0]
-      --list-methods                   List available methods
   -o, --output <OUTPUT>                Output filename
-      --resize <RESIZE>                Output resize (WxH)
-      --alpha <ALPHA>                  Alpha saving mode: none, split [default: split]
+      --resize <RESIZE>                Resize after scale (WxH or Nx)
+      --resize-method <RESIZE_METHOD>  Resize method: nearest, triangle, catmullrom, gaussian, lanczos3 [default: nearest]
+      --alpha <ALPHA>                  Alpha mode: auto, strip, bypass, split [default: split]
       --custom-preset <CUSTOM_PRESET>  Custom .slangp file
   -h, --help                           Print help
   -V, --version                        Print version
@@ -29,9 +30,6 @@ ra-pixelart-scale -m scalefx-9x -i mario.png -o /tmp/mario-9x.png
 
 # Or set custom scale
 ra-pixelart-scale -m xbrz-freescale-multipass -i mario.png -s 3 -o /tmp/mario-3x.png
-
-# Or use custom slangp preset
-ra-pixelart-scale --custom-preset slangs-shaders/edge-smoothing/scalefx/scalefx.slangp -i mario.png -s 3 -o /tmp/mario-3x.png
 ```
 
 # Alpha channel
@@ -51,6 +49,18 @@ For e.g. for hq2x, the best scale is 2, for hq4x it is 4.
 You don't need to pass `--scale` in most cases, because the best scale is chosen by default for each method.
 
 Pass custom `--scale` only for specific scale methods which can work with any scale value. See table below for more info.
+
+# Resize after scale
+
+You can apply additional for resize after scaling.
+
+```bash
+# Resize image 9x larger and then scale it back to the original WxH using lanczos3
+ra-pixelart-scale -m scalefx-9x --resize 100% --resize-method lanczos3 -i /tmp/pixels.png -o /tmp/pixels-smooth.png
+
+# Resize image 9x larger and then resize it to 128x128 using lanczos3
+ra-pixelart-scale -m scalefx-9x --resize 128x128 --resize-method lanczos3 -i /tmp/pixels.png -o /tmp/pixels-smooth.png
+```
 
 # Custom shaders
 

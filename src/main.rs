@@ -396,7 +396,7 @@ fn get_shaders_dir() -> String {
 	let exe_dir = exe_file.parent().unwrap();
 
 	if exe_dir.starts_with("/usr/bin") || exe_dir.starts_with("/usr/local/bin") {
-		return exe_dir.join("../ra-pixelart-scale/shaders").to_str().unwrap().to_string();
+		return exe_dir.join("../share/ra-pixelart-scale/shaders").to_str().unwrap().to_string();
 	} else if Path::exists(&exe_dir.join("shaders")) {
 		return exe_dir.join("shaders").to_str().unwrap().to_string();
 	} else {

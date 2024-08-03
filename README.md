@@ -25,7 +25,11 @@ Options:
 
 # Install
 - ArchLinux: `yay -S ra-pixelart-scale-git`
-- Any other - just build: `cargo build --release`
+- Other Linux or OSX:
+	```bash
+	make
+ 	sudo make install
+	```
 
 # Examples
 ```bash

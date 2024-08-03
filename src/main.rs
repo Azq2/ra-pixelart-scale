@@ -31,7 +31,7 @@ struct Args {
 	#[arg(short, long)]
 	output: Option<String>,
 
-	/// Resize after scale (WxH or Nx)
+	/// Resize after scale (WxH or %)
 	#[arg(long)]
 	resize: Option<String>,
 
@@ -371,7 +371,7 @@ fn get_scaling_method(args: &Args) -> Option<ScaleMethod> {
 			file: args.custom_preset.clone().unwrap(),
 			scale_min: 1.0,
 			scale_max: 1.0,
-			alpha: false
+			alpha: true
 		};
 		return Some(method);
 	} else {

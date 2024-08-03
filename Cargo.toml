@@ -20,6 +20,3 @@ hqx = { git = "https://github.com/CryZe/wasmboy-rs" }
 image = "0.25.2"
 mmpx = { git = "https://github.com/yet-another-org-with-forks/mmpx-rs" }
 cargo-deb = "2.5.1"
-
-[profile.release]
-lto = "off"

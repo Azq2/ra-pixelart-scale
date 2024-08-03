@@ -23,6 +23,10 @@ Options:
   -V, --version                        Print version
 ```
 
+# Install
+- ArchLinux: `yay -S ra-pixelart-scale-git`
+- Any other: just build: `cargo build --release`
+
 # Examples
 ```bash
 # Scale will automatically set to best default for given method
